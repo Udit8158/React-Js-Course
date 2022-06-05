@@ -1,6 +1,25 @@
+// Import react and useStat (hook) to use state variabl
+import React, { useState } from "react";
+
 import PropTypes from "prop-types";
 
 export default function BasicForm(props) {
+  // Make a state variable text and a func setText(to change the text)
+  const [text, setText] = useState("example@gmail.com"); // Default text = Email
+
+  // text = "hie"; // wrong way to change state variable
+
+  const onChange = (event) => {
+    // console.log("Changing", event.target.value);
+    const email = event.target.value;
+    setText(email);
+  };
+
+  const upperCase = () => {
+    // console.log(text);
+    const newTxt = text.toUpperCase();
+    setText(newTxt);
+  };
   return (
     <div className="p-3">
       <form>
@@ -13,6 +32,8 @@ export default function BasicForm(props) {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            value={text}
+            onChange={onChange}
           />
           <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
@@ -28,11 +49,10 @@ export default function BasicForm(props) {
             id="exampleInputPassword1"
           />
         </div>
-
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
       </form>
+      <button className="btn btn-primary" onClick={upperCase}>
+        Submit
+      </button>
     </div>
   );
 }
