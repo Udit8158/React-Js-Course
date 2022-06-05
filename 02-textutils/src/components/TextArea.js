@@ -3,7 +3,7 @@ import "../App.css";
 
 // After reload clear the loacal storage... only for redo (not optimized)
 localStorage.clear();
-export default function TextArea() {
+export default function TextArea(props) {
   // Setting state variable
   const [text, setText] = useState("");
 
@@ -69,12 +69,33 @@ export default function TextArea() {
 
   // Logic for reading time
   const avaragePerWordTime = 0.005; // In minute
-  const readingTime = Math.round(avaragePerWordTime * wordCount);
+  let readingTime = avaragePerWordTime * wordCount;
+  let roundedReadingTime = Math.round(readingTime);
+
+  if (readingTime > 0 && readingTime < 1) {
+    readingTime = "less than 1";
+  } else {
+    readingTime = roundedReadingTime;
+  }
+
+  let textColorMode = "";
+  let textAreaColor = "";
+  if (props.textAreaColorMode === "light") {
+    textColorMode = "dark";
+    textAreaColor = "#dedfe3";
+  } else {
+    textColorMode = "light";
+    textAreaColor = "#b8bfdb";
+  }
+
+  const textAreaStyle = {
+    backgroundColor: textAreaColor,
+  };
 
   // Return the DOM
   return (
     <div className="container my-5">
-      <h1>Enter your text here</h1>
+      <h1 className={`text-${textColorMode}`}>Enter your text here</h1>
       <textarea
         className="form-control my-3"
         placeholder="Enter your text here....."
@@ -82,6 +103,7 @@ export default function TextArea() {
         rows={8}
         value={text}
         onChange={onChangeText}
+        style={textAreaStyle}
       ></textarea>
       <button className="btn btn-primary" onClick={toDoUpperCase}>
         Uppercase
@@ -105,7 +127,7 @@ export default function TextArea() {
         Copy to Clipboar
       </button>
 
-      <div className="summery my-3">
+      <div className={`summery my-3 text-${textColorMode}`}>
         <h2>You text summery</h2>
         <p>
           Wordcount : <b>{wordCount}</b> , Charactercount :{" "}
@@ -113,11 +135,11 @@ export default function TextArea() {
         </p>
 
         <p id="readingTimeElemetAfterOne">
-          Avarage reading time : <b>{readingTime} Minutes</b>
+          Avarage reading time :<b>{roundedReadingTime} Minutes</b>
         </p>
         <div className="previewSection">
           <h2>Preview</h2>
-          <p>{text}</p>
+          <p>{text === "" ? "Write something to see the preview" : text}</p>
         </div>
       </div>
     </div>
