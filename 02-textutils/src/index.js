@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import Navbar from "./components/Navbar";
 import TextArea from "./components/TextArea";
+// import TestDarkModeAccordion from "./components/TestDarkModeAccordion";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -11,6 +12,7 @@ root.render(
   <>
     <Navbar title="TextUtils" />
     <TextArea />
+    {/* <TestDarkModeAccordion /> */}
   </>
 );
 
