@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import TextArea from "./components/TextArea";
 import React, { useState } from "react";
 import Alert from "./components/Alert";
+import About from "./components/About";
 
 function App() {
   // mode changing stat
@@ -70,6 +71,7 @@ function App() {
         showAlert={showAlert}
         isRedishDarkMode={isRedishDarkMode}
       />
+      <About />
     </div>
   );
 }

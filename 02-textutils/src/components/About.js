@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function TestDarkModeAccordion() {
+export default function About() {
   // Create a state vaiable for style
   const [myStyle, setMyStyle] = useState({
     backgroundColor: "white",
