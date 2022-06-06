@@ -5,7 +5,7 @@ import TextArea from "./components/TextArea";
 import React, { useState } from "react";
 import Alert from "./components/Alert";
 import About from "./components/About";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 function App() {
@@ -60,7 +60,7 @@ function App() {
   // Component return
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router>
         <Navbar
           title="Textutils"
           navBarColorMode={mode}
@@ -84,7 +84,7 @@ function App() {
 
           <Route exact path="/about" element={<About />}></Route>
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
