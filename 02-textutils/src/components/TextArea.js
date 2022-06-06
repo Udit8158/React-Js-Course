@@ -19,33 +19,39 @@ export default function TextArea(props) {
   const toDoUpperCase = () => {
     const uppercaseText = text.toUpperCase();
     setText(uppercaseText);
+    props.showAlert("Converted into uppercase", "success");
   };
 
   const toDoLowerCase = () => {
     const lowerCase = text.toLowerCase();
     setText(lowerCase);
+    props.showAlert("Converted into lowercase", "success");
   };
 
   const toDoRemove = () => {
     const blankText = "";
     setText(blankText);
+    props.showAlert("Removed all the text", "success");
   };
 
   const makeQoute = () => {
     const quotedText = `"${text}"`;
     setText(quotedText);
+    props.showAlert("Made a quote with your text", "success");
   };
 
   const undo = () => {
     localStorage.setItem("beforeUndoText", text);
     const afterUndoText = text.slice(0, text.length - 1);
     setText(afterUndoText);
+    props.showAlert("Undo successfully", "success");
   };
 
   const redo = () => {
     const redoText = localStorage.getItem("beforeUndoText");
     if (redoText !== null) {
       setText(redoText);
+      props.showAlert("Redo successfully", "success");
     }
   };
 
@@ -57,6 +63,7 @@ export default function TextArea(props) {
 
     //copy the selected text value in clipboard
     navigator.clipboard.writeText(myTextArea.value);
+    props.showAlert("Copied text into your clipboard", "success");
   };
 
   // logic for charactercount and wordcount
@@ -82,12 +89,18 @@ export default function TextArea(props) {
 
   let textColorMode = "";
   let textAreaColor = "";
+  // Logic for changing color (It is not optimized for many theming color)
   if (props.textAreaColorMode === "light") {
     textColorMode = "dark";
     textAreaColor = "#dedfe3";
   } else {
-    textColorMode = "light";
-    textAreaColor = "#b8bfdb";
+    if (props.isRedishDarkMode) {
+      textColorMode = "light";
+      textAreaColor = "#6b4d52";
+    } else {
+      textColorMode = "light";
+      textAreaColor = "#b8bfdb";
+    }
   }
 
   const textAreaStyle = {
@@ -107,26 +120,59 @@ export default function TextArea(props) {
         onChange={onChangeText}
         style={textAreaStyle}
       ></textarea>
-      <button className="btn btn-primary" onClick={toDoUpperCase}>
+      <button
+        className={`btn btn-${props.isRedishDarkMode ? "danger" : "primary"}`}
+        onClick={toDoUpperCase}
+      >
         Uppercase
       </button>
-      <button className="btn btn-primary mx-2" onClick={toDoLowerCase}>
+      <button
+        className={`btn btn-${
+          props.isRedishDarkMode ? "danger" : "primary"
+        } mx-2`}
+        onClick={toDoLowerCase}
+      >
         Lowercase
       </button>
-      <button className="btn btn-primary mx-2" onClick={toDoRemove}>
+      <button
+        className={`btn btn-${
+          props.isRedishDarkMode ? "danger" : "primary"
+        } mx-2`}
+        onClick={toDoRemove}
+      >
         Remove All
       </button>
-      <button className="btn btn-primary mx-2" onClick={makeQoute}>
+      <button
+        className={`btn btn-${
+          props.isRedishDarkMode ? "danger" : "primary"
+        } mx-2`}
+        onClick={makeQoute}
+      >
         Make Quote
       </button>
-      <button className="btn btn-primary mx-2" onClick={undo}>
+      <button
+        className={`btn btn-${
+          props.isRedishDarkMode ? "danger" : "primary"
+        } mx-2`}
+        onClick={undo}
+      >
         Undo
       </button>
-      <button className="btn btn-primary mx-2" onClick={redo}>
+      <button
+        className={`btn btn-${
+          props.isRedishDarkMode ? "danger" : "primary"
+        } mx-2`}
+        onClick={redo}
+      >
         Redo
       </button>
       {/* <i className="bi bi-arrow-counterclockwise"></i> */}
-      <button className="btn btn-primary mx-2" onClick={copyText}>
+      <button
+        className={`btn btn-${
+          props.isRedishDarkMode ? "danger" : "primary"
+        } mx-2`}
+        onClick={copyText}
+      >
         Copy to Clipboard
       </button>
       {/* <i

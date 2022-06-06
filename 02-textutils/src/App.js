@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import TextArea from "./components/TextArea";
 import React, { useState } from "react";
+import Alert from "./components/Alert";
 
 function App() {
   // mode changing stat
@@ -10,8 +11,25 @@ function App() {
   // changing text for enable dark or light mode (state variable)
   const [modeChangeText, setModeChangeText] = useState("Enable dark mode");
 
-  const bodyDarkColor = "#343a40";
-  const bodyLightColor = "white";
+  // state variable for alert
+  const [alert, setAlert] = useState(null);
+
+  // state variable for iscolormode redish or not
+  const [isRedishDarkMode, setIsRedishDarkMode] = useState(false);
+
+  // Make a function to show an alert which take some arguments and create a new alert
+  const showAlert = (messege, type) => {
+    setAlert({
+      messege: messege,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 2000);
+  };
+
+  let bodyDarkColor = "#343a40";
+  let bodyLightColor = "white";
   //Toggole dark mode
   const toggoleDarkMode = () => {
     if (mode === "light") {
@@ -24,6 +42,18 @@ function App() {
       document.body.style.backgroundColor = bodyLightColor;
     }
   };
+
+  // Toggole redish dark mode
+  const toggoleRedishDarkMode = () => {
+    bodyDarkColor = "#302426";
+    // Logic for setting variable
+    if (mode === "light") {
+      setIsRedishDarkMode(true);
+    } else {
+      setIsRedishDarkMode(false);
+    }
+    toggoleDarkMode();
+  };
   // Component return
   return (
     <div className="App">
@@ -32,8 +62,14 @@ function App() {
         navBarColorMode={mode}
         toggoleDarkMode={toggoleDarkMode}
         changeModeText={modeChangeText}
+        toggoleRedishDarkMode={toggoleRedishDarkMode}
       />
-      <TextArea textAreaColorMode={mode} />
+      <Alert alert={alert} />
+      <TextArea
+        textAreaColorMode={mode}
+        showAlert={showAlert}
+        isRedishDarkMode={isRedishDarkMode}
+      />
     </div>
   );
 }

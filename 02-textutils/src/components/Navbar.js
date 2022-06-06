@@ -46,6 +46,13 @@ export default function Navbar(props) {
                 Search
               </button>
             </form> */}
+            <button
+              className="btn btn-danger mx-2"
+              onClick={props.toggoleRedishDarkMode}
+            >
+              {props.navBarColorMode === "light" ? "Enable" : "Disable"} Redish
+              Dark Mode
+            </button>
             {/* Toggle dark mode */}
             <div className="form-check form-switch">
               <input
@@ -54,6 +61,7 @@ export default function Navbar(props) {
                 role="switch"
                 id="flexSwitchCheckDefault"
                 onClick={props.toggoleDarkMode}
+                checked={props.navBarColorMode === "light" ? false : true}
               />
               <label
                 className={`form-check-label text-${
