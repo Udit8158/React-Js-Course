@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "../App.css";
+import PropTypes from "prop-types";
 
 // After reload clear the loacal storage... only for redo (not optimized)
 localStorage.clear();
+
 export default function TextArea(props) {
   // Setting state variable
   const [text, setText] = useState("");
@@ -123,9 +125,15 @@ export default function TextArea(props) {
       <button className="btn btn-primary mx-2" onClick={redo}>
         Redo
       </button>
+      {/* <i className="bi bi-arrow-counterclockwise"></i> */}
       <button className="btn btn-primary mx-2" onClick={copyText}>
-        Copy to Clipboar
+        Copy to Clipboard
       </button>
+      {/* <i
+        className={`fa-solid fa-clipboard text-${textColorMode}`}
+        onClick={copyText}
+      ></i> */}
+      {/* <span className={`mx-1 text-${textColorMode}`}>Copy to clipboard</span> */}
 
       <div className={`summery my-3 text-${textColorMode}`}>
         <h2>You text summery</h2>
@@ -145,3 +153,12 @@ export default function TextArea(props) {
     </div>
   );
 }
+
+// Setting requird props
+TextArea.propTypes = {
+  textAreaColorMode: PropTypes.element.isRequired,
+};
+
+TextArea.propTypes = {
+  textAreaColorMode: PropTypes.string,
+};

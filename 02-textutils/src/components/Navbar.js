@@ -71,7 +71,27 @@ export default function Navbar(props) {
   );
 }
 
+// Set required props
 Navbar.propTypes = {
-  //   title: PropTypes.element.isRequired,
+  title: PropTypes.element.isRequired,
+  navBarColorMode: PropTypes.element.isRequired,
+  toggoleDarkMode: PropTypes.element.isRequired,
+  changeModeText: PropTypes.element.isRequired,
+};
+
+// set proptypes
+Navbar.propTypes = {
   title: PropTypes.string,
+  navBarColorMode: PropTypes.string,
+  toggoleDarkMode: PropTypes.func, // here function = func
+  changeModeText: PropTypes.string,
+};
+
+// Default value of props
+Navbar.defaultProps = {
+  title: "Textutils",
+  // can't set this in this file because they are using variable from app.js
+  // navBarColorMode: { mode },
+  // toggoleDarkMode: { toggoleDarkMode },
+  // changeModeText: { modeChangeText },
 };
