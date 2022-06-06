@@ -5,6 +5,8 @@ import TextArea from "./components/TextArea";
 import React, { useState } from "react";
 import Alert from "./components/Alert";
 import About from "./components/About";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 function App() {
   // mode changing stat
@@ -58,20 +60,31 @@ function App() {
   // Component return
   return (
     <div className="App">
-      <Navbar
-        title="Textutils"
-        navBarColorMode={mode}
-        toggoleDarkMode={toggoleDarkMode}
-        changeModeText={modeChangeText}
-        toggoleRedishDarkMode={toggoleRedishDarkMode}
-      />
-      <Alert alert={alert} />
-      <TextArea
-        textAreaColorMode={mode}
-        showAlert={showAlert}
-        isRedishDarkMode={isRedishDarkMode}
-      />
-      <About />
+      <BrowserRouter>
+        <Navbar
+          title="Textutils"
+          navBarColorMode={mode}
+          toggoleDarkMode={toggoleDarkMode}
+          changeModeText={modeChangeText}
+          toggoleRedishDarkMode={toggoleRedishDarkMode}
+        />
+        <Alert alert={alert} />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <TextArea
+                textAreaColorMode={mode}
+                showAlert={showAlert}
+                isRedishDarkMode={isRedishDarkMode}
+              />
+            }
+          ></Route>
+
+          <Route exact path="/about" element={<About />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
