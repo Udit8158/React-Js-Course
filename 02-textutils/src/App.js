@@ -18,7 +18,7 @@ function App() {
   const [alert, setAlert] = useState(null);
 
   // state variable for iscolormode redish or not
-  const [isRedishDarkMode, setIsRedishDarkMode] = useState(false);
+  // const [isRedishDarkMode, setIsRedishDarkMode] = useState(false);
 
   // Make a function to show an alert which take some arguments and create a new alert
   const showAlert = (messege, type) => {
@@ -47,16 +47,16 @@ function App() {
   };
 
   // Toggole redish dark mode
-  const toggoleRedishDarkMode = () => {
-    bodyDarkColor = "#302426";
-    // Logic for setting variable
-    if (mode === "light") {
-      setIsRedishDarkMode(true);
-    } else {
-      setIsRedishDarkMode(false);
-    }
-    toggoleDarkMode();
-  };
+  // const toggoleRedishDarkMode = () => {
+  //   bodyDarkColor = "#302426";
+  //   // Logic for setting variable
+  //   if (mode === "light") {
+  //     setIsRedishDarkMode(true);
+  //   } else {
+  //     setIsRedishDarkMode(false);
+  //   }
+  //   toggoleDarkMode();
+  // };
   // Component return
   return (
     <div className="App">
@@ -66,7 +66,7 @@ function App() {
           navBarColorMode={mode}
           toggoleDarkMode={toggoleDarkMode}
           changeModeText={modeChangeText}
-          toggoleRedishDarkMode={toggoleRedishDarkMode}
+          // toggoleRedishDarkMode={toggoleRedishDarkMode}
         />
         <Alert alert={alert} />
         <Routes>
@@ -77,7 +77,7 @@ function App() {
               <TextArea
                 textAreaColorMode={mode}
                 showAlert={showAlert}
-                isRedishDarkMode={isRedishDarkMode}
+                // isRedishDarkMode={isRedishDarkMode}
               />
             }
           ></Route>

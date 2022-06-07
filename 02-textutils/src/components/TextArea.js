@@ -71,7 +71,8 @@ export default function TextArea(props) {
   // logic for charactercount and wordcount
   const textArr = Array.from(text);
   const textArrWithoutSpace = textArr.filter((e) => e !== " ");
-  const wordArr = text.split(" ");
+  // Use reg exp mean, count " " and new line  both.
+  const wordArr = text.split(/\s+/);
   const accurateWrodArr = wordArr.filter((word) => word !== "");
 
   const characterCount = textArrWithoutSpace.length;
@@ -83,12 +84,6 @@ export default function TextArea(props) {
   let readingTime = avaragePerWordTime * wordCount;
   // let roundedReadingTime = Math.round(readingTime);
 
-  // if (readingTime > 0 && readingTime < 1) {
-  //   readingTime = "less than 1";
-  // } else {
-  //   readingTime = roundedReadingTime;
-  // }
-
   let textColorMode = "";
   let textAreaColor = "";
   // Logic for changing color (It is not optimized for many theming color)
@@ -96,13 +91,8 @@ export default function TextArea(props) {
     textColorMode = "dark";
     textAreaColor = "#dedfe3";
   } else {
-    if (props.isRedishDarkMode) {
-      textColorMode = "light";
-      textAreaColor = "#6b4d52";
-    } else {
-      textColorMode = "light";
-      textAreaColor = "#b8bfdb";
-    }
+    textColorMode = "light";
+    textAreaColor = "#b8bfdb";
   }
 
   const textAreaStyle = {
@@ -202,10 +192,7 @@ export default function TextArea(props) {
         <p id="readingTimeElemetAfterOne">
           Avarage reading time : <b>{readingTime} Minutes</b>
         </p>
-        <div
-          className="previewSection "
-          // style={{ maxwidth: "50%", border: "2px solid blue" }}
-        >
+        <div className="previewSection ">
           <h2>Preview</h2>
           <p>{text === "" ? "Nothing to preview" : text}</p>
         </div>

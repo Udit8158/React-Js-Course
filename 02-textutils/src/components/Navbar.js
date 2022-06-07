@@ -41,24 +41,14 @@ export default function Navbar(props) {
                 </Link>
               </li>
             </ul>
-            {/* <form className="d-flex" role="search">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-primary" type="submit">
-                Search
-              </button>
-            </form> */}
-            <button
+
+            {/* <button
               className="btn btn-danger mx-2"
               onClick={props.toggoleRedishDarkMode}
             >
               {props.navBarColorMode === "light" ? "Enable" : "Disable"} Redish
               Dark Mode
-            </button>
+            </button> */}
             {/* Toggle dark mode */}
             <div className="form-check form-switch">
               <input
