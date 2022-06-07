@@ -82,7 +82,11 @@ function App() {
             }
           ></Route>
 
-          <Route exact path="/about" element={<About />}></Route>
+          <Route
+            exact
+            path="/about"
+            element={<About mode={mode} bodyDarkColor={bodyDarkColor} />}
+          ></Route>
         </Routes>
       </Router>
     </div>

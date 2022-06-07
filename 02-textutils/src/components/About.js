@@ -1,13 +1,23 @@
 import React from "react";
 
-export default function About() {
+export default function About(props) {
+  let accordionBackgroundColor =
+    props.mode === "dark" ? props.darkModeBodyColor : "white";
+
+  let accordionTextColor = props.mode === "dark" ? "white" : "black";
   return (
     // In react always add style in object for inline css
-    <div className="container my-5">
+    <div
+      className="container my-5"
+      style={{
+        backgroundColor: accordionBackgroundColor,
+        color: accordionTextColor,
+      }}
+    >
       <h1>About Us</h1>
       <div className="accordion" id="accordionExample">
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingOne">
+          <h2 id="headingOne">
             <button
               className="accordion-button"
               type="button"
