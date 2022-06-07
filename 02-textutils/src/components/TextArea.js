@@ -8,6 +8,7 @@ localStorage.clear();
 export default function TextArea(props) {
   // Setting state variable
   const [text, setText] = useState("");
+  let disabled = text.length === 0 ? true : false;
 
   // changing state variable with onchange method
   const onChangeText = (event) => {
@@ -63,6 +64,7 @@ export default function TextArea(props) {
 
     //copy the selected text value in clipboard
     navigator.clipboard.writeText(myTextArea.value);
+    window.getSelection().removeAllRanges();
     props.showAlert("Copied text into your clipboard", "success");
   };
 
@@ -79,13 +81,13 @@ export default function TextArea(props) {
   // Logic for reading time
   const avaragePerWordTime = 0.005; // In minute
   let readingTime = avaragePerWordTime * wordCount;
-  let roundedReadingTime = Math.round(readingTime);
+  // let roundedReadingTime = Math.round(readingTime);
 
-  if (readingTime > 0 && readingTime < 1) {
-    readingTime = "less than 1";
-  } else {
-    readingTime = roundedReadingTime;
-  }
+  // if (readingTime > 0 && readingTime < 1) {
+  //   readingTime = "less than 1";
+  // } else {
+  //   readingTime = roundedReadingTime;
+  // }
 
   let textColorMode = "";
   let textAreaColor = "";
@@ -110,7 +112,7 @@ export default function TextArea(props) {
   // Return the DOM
   return (
     <div className="container my-5">
-      <h1 className={`text-${textColorMode}`}>Enter your text here</h1>
+      <h1 className={`text-${textColorMode} mb-4`}>Enter your text here</h1>
       <textarea
         className="form-control my-3"
         placeholder="Enter your text here....."
@@ -121,48 +123,56 @@ export default function TextArea(props) {
         style={textAreaStyle}
       ></textarea>
       <button
-        className={`btn btn-${props.isRedishDarkMode ? "danger" : "primary"}`}
+        className={`btn btn-${
+          props.isRedishDarkMode ? "danger" : "primary"
+        } my-2 me-2`}
         onClick={toDoUpperCase}
+        disabled={disabled}
       >
         Uppercase
       </button>
       <button
         className={`btn btn-${
           props.isRedishDarkMode ? "danger" : "primary"
-        } mx-2`}
+        } mx-2 my-2`}
         onClick={toDoLowerCase}
+        disabled={disabled}
       >
         Lowercase
       </button>
       <button
         className={`btn btn-${
           props.isRedishDarkMode ? "danger" : "primary"
-        } mx-2`}
+        } mx-2 my-2`}
         onClick={toDoRemove}
+        disabled={disabled}
       >
         Remove All
       </button>
       <button
         className={`btn btn-${
           props.isRedishDarkMode ? "danger" : "primary"
-        } mx-2`}
+        } mx-2 my-2`}
         onClick={makeQoute}
+        disabled={disabled}
       >
         Make Quote
       </button>
       <button
         className={`btn btn-${
           props.isRedishDarkMode ? "danger" : "primary"
-        } mx-2`}
+        } mx-2 my-2`}
         onClick={undo}
+        disabled={disabled}
       >
         Undo
       </button>
       <button
         className={`btn btn-${
           props.isRedishDarkMode ? "danger" : "primary"
-        } mx-2`}
+        } mx-2 my-2`}
         onClick={redo}
+        disabled={disabled}
       >
         Redo
       </button>
@@ -170,8 +180,9 @@ export default function TextArea(props) {
       <button
         className={`btn btn-${
           props.isRedishDarkMode ? "danger" : "primary"
-        } mx-2`}
+        } mx-2 my-2`}
         onClick={copyText}
+        disabled={disabled}
       >
         Copy to Clipboard
       </button>
@@ -189,11 +200,14 @@ export default function TextArea(props) {
         </p>
 
         <p id="readingTimeElemetAfterOne">
-          Avarage reading time :<b>{roundedReadingTime} Minutes</b>
+          Avarage reading time : <b>{readingTime} Minutes</b>
         </p>
-        <div className="previewSection">
+        <div
+          className="previewSection "
+          // style={{ maxwidth: "50%", border: "2px solid blue" }}
+        >
           <h2>Preview</h2>
-          <p>{text === "" ? "Write something to see the preview" : text}</p>
+          <p>{text === "" ? "Nothing to preview" : text}</p>
         </div>
       </div>
     </div>

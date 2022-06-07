@@ -6,7 +6,8 @@ export default function Navbar(props) {
   return (
     <div>
       <nav
-        className={`navbar navbar-${props.navBarColorMode} navbar-expand-lg bg-${props.navBarColorMode}`}
+        className={`navbar navbar-${props.navBarColorMode} navbar-expand-lg bg-${props.navBarColorMode} position-static`}
+        style={{ minWidth: "100%" }}
       >
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">

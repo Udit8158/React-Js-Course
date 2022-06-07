@@ -4,19 +4,21 @@ import React from "react";
 export default function Alert(props) {
   return (
     // This syntax means 'first check if the value of props.alert is not null, then only return the JSX' this is very helpful syntax.
-    props.alert && (
-      <div>
-        <div
-          className={`alert alert-${props.alert.type} d-flex align-items-center`}
-          role="alert"
-        >
-          <div>
-            <strong>{props.alert.type} : </strong>
-            {props.alert.messege}
+    <div style={{ height: "50px" }}>
+      {props.alert && (
+        <div>
+          <div
+            className={`alert alert-${props.alert.type} d-flex align-items-center`}
+            role="alert"
+          >
+            <div>
+              <strong>{props.alert.type} : </strong>
+              {props.alert.messege}
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )}
+    </div>
   );
 }
 
