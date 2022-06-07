@@ -13,11 +13,18 @@ export class News extends Component {
   render() {
     return (
       <>
-        <NewsItem
-          title={`${this.state.title}`}
-          description="New news desc"
-          url="/"
-        />
+        <div className="container">
+          <h1 className="">Our top headlines</h1>
+          <div className="row my-5">
+            <div className="col my-3">
+              <NewsItem
+                title="MY NEWS"
+                description="This is  the best news"
+                url="/"
+              />
+            </div>
+          </div>
+        </div>
       </>
     );
   }
