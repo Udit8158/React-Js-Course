@@ -335,18 +335,32 @@ export class News extends Component {
         "Dustin Johnson, the former No. 1 golfer in the world and the 2020 Masters champion, said Tuesday he resigned from the PGA Tour as he readied himself for LIV Golfs first tournament.\r\nJohnson is one of… [+2187 chars]",
     },
   ];
+
   // Setting state...
   constructor() {
     super();
     this.state = {
-      articles: this.articles.filter(
+      articles: [],
+    };
+  }
+  // Use in componentDidMount (don't know why... this is actually use of life cycale.)
+  async componentDidMount() {
+    // Fetching from new api...
+    const url =
+      "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=d34ab57786dc4ece9656435b68646fa5";
+    const data = await fetch(url);
+    const parsedData = await data.json();
+    // console.log(parsedData);
+    // changing state
+    this.setState({
+      articles: parsedData.articles.filter(
         (e) =>
           e.title !== null &&
           e.description !== null &&
           e.urlToImage !== null &&
           e.url !== null
       ),
-    };
+    });
   }
 
   render() {
