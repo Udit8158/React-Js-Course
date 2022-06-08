@@ -17,7 +17,7 @@ export class NewsItem extends Component {
               className="btn btn-primary btn-sm"
               rel="noopener noreferrer" // warning here so solve by this with the help of google
             >
-              Go somewhere
+              Read more
             </a>
           </div>
         </div>
