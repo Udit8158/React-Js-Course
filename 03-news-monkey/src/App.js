@@ -6,11 +6,22 @@ import News from "./components/News";
 // import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 export class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      mode: "light",
+    };
+  }
+
+  toggleMode = () => {
+    const newMode = this.state.mode === "light" ? "dark" : "light";
+    this.setState({ mode: newMode });
+  };
   render() {
     return (
       <>
         <Router>
-          <Navbar />
+          <Navbar mode={this.state.mode} toggleMode={this.toggleMode} />
           <Routes>
             <Route
               exact
