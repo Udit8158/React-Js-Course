@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export class ListItem extends Component {
   render() {
@@ -6,9 +7,13 @@ export class ListItem extends Component {
     return (
       <div>
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/#">
+          <Link
+            className="nav-link active"
+            aria-current="page"
+            to={this.props.path}
+          >
             {this.props.name}
-          </a>
+          </Link>
         </li>
       </div>
     );

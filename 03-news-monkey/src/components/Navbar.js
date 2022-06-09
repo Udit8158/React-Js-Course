@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ListItem from "./ListItem";
+import { Link } from "react-router-dom";
 
 export class Navbar extends Component {
   render() {
@@ -7,24 +8,24 @@ export class Navbar extends Component {
       <div>
         <nav className="navbar navbar-expand-lg bg-light">
           <div className="container-fluid">
-            <a className="navbar-brand" href="#">
+            <Link className="navbar-brand" to="/">
               Navbar
-            </a>
+            </Link>
 
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <ListItem name="Home" />
-                <ListItem name="About" />
-                <ListItem name="Business" />
-                <ListItem name="Entertainment" />
-                <ListItem name="General" />
-                <ListItem name="Helth" />
-                <ListItem name="Science" />
-                <ListItem name="Sports" />
-                <ListItem name="Teachnology" />
+                <ListItem name="Home" path="/" />
+
+                <ListItem name="Business" path="/business" />
+                <ListItem name="Entertainment" path="/entertainment" />
+
+                <ListItem name="Health" path="/health" />
+                <ListItem name="Science" path="/science" />
+                <ListItem name="Sports" path="/sports" />
+                <ListItem name="Teachnology" path="/teachnology" />
               </ul>
               <form className="d-flex" role="search">
                 <input

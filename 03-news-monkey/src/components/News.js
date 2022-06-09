@@ -37,7 +37,7 @@ export class News extends Component {
       ),
       loading: false,
     });
-    // console.log("1", url);
+    // console.log(url);
   }
 
   // Prev and next page logic
