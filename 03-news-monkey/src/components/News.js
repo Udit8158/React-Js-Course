@@ -37,7 +37,7 @@ export class News extends Component {
       ),
       loading: false,
     });
-    // console.log(url);
+    console.log(url);
   }
 
   // Prev and next page logic
@@ -126,6 +126,9 @@ export class News extends Component {
                       description={e.description.slice(0, 83) + "...."}
                       imageUrl={e.urlToImage}
                       newsUrl={e.url}
+                      author={e.author}
+                      date={e.publishedAt}
+                      source={e.source.name}
                     />
                   </div>
                 );
