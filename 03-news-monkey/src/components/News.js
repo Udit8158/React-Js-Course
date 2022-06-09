@@ -59,10 +59,17 @@ export class News extends Component {
   render() {
     // let { pageSize } = this.props;
     // console.log(this.state.articles);
+    let { mode } = this.props;
     return (
       <>
         <div className="container">
-          <h1 className="text-center">Our top headlines</h1>
+          <h1
+            className={`text-center mt-3 text-${
+              mode === "light" ? "dark" : "light"
+            }`}
+          >
+            Our top headlines
+          </h1>
 
           {/* Means  if this.state.loading === true then only display this loadig spinner  (very useful syntax) */}
           {this.state.loading && (
@@ -71,7 +78,7 @@ export class News extends Component {
             </div>
           )}
           {!this.state.loading && (
-            <div className="row my-5">
+            <div className="row my-2">
               {/* Generate this part */}
               {/* // In ract for each is not working properly we should use map to itreate array.  */}
               {this.state.articles.map((e) => {
@@ -85,6 +92,7 @@ export class News extends Component {
                       author={e.author}
                       date={e.publishedAt}
                       source={e.source.name}
+                      mode={this.props.mode}
                     />
                   </div>
                 );

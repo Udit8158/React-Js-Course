@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 
 export class Navbar extends Component {
   render() {
-    let { mode, toggleMode } = this.props;
+    let { mode, toggleMode, title } = this.props;
     return (
       <div>
         <nav className={`navbar navbar-${mode} navbar-expand-lg bg-${mode}`}>
           <div className="container-fluid">
             <Link className="navbar-brand" to="/">
-              Navbar
+              {title}
             </Link>
 
             {/* Mobile responsive section */}
@@ -44,7 +44,7 @@ export class Navbar extends Component {
               </ul>
 
               {/* Darkmode section */}
-              <div className="form-check form-switch">
+              <div className="form-check form-switch mx-2">
                 <input
                   className="form-check-input"
                   type="checkbox"
@@ -69,9 +69,7 @@ export class Navbar extends Component {
                   placeholder="Search"
                   aria-label="Search"
                 />
-                <button className="btn btn-outline-success" type="submit">
-                  Search
-                </button>
+                <button className="btn btn-primary">Search</button>
               </form>
             </div>
           </div>

@@ -3,19 +3,39 @@ import React, { Component } from "react";
 export class NewsItem extends Component {
   render() {
     // Use props in newsitem...
-    let { title, description, imageUrl, newsUrl, author, date, source } =
+    let { title, description, imageUrl, newsUrl, author, date, source, mode } =
       this.props;
+    let cardBodyDarkModeColor;
+
+    if (this.props.mode === "dark") {
+      cardBodyDarkModeColor = "#b8bfdb";
+    } else {
+      cardBodyDarkModeColor = "white";
+    }
     return (
-      <div className="container">
-        <div className="card">
+      <div
+        className="container"
+        // style={{ backgroundColor: cardBodyDarkModeColor }}
+      >
+        <div
+          className="card"
+          style={{ backgroundColor: cardBodyDarkModeColor }}
+        >
           <span
             className="position-absolute top-0 badge rounded-pill translate-middle  bg-danger "
-            style={{ left: "90%", zIndex: "1" }}
+            style={{
+              left: "90%",
+              zIndex: "1",
+              // backgroundColor: cardBodyDarkModeColor,
+            }}
           >
             {source}
           </span>
           <img src={imageUrl} className="card-img-top" alt="..." />
-          <div className="card-body">
+          <div
+            className="card-body"
+            // style={{ backgroundColor: cardBodyDarkModeColor }}
+          >
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{description}</p>
             <div className="card-footer">
