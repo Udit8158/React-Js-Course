@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ListItem from "./ListItem";
 
 export class Navbar extends Component {
   render() {
@@ -15,20 +16,15 @@ export class Navbar extends Component {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/">
-                    Home
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link active"
-                    aria-current="page"
-                    href="/about"
-                  >
-                    About
-                  </a>
-                </li>
+                <ListItem name="Home" />
+                <ListItem name="About" />
+                <ListItem name="Business" />
+                <ListItem name="Entertainment" />
+                <ListItem name="General" />
+                <ListItem name="Helth" />
+                <ListItem name="Science" />
+                <ListItem name="Sports" />
+                <ListItem name="Teachnology" />
               </ul>
               <form className="d-flex" role="search">
                 <input

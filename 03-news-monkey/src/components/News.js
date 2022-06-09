@@ -19,7 +19,7 @@ export class News extends Component {
   async componentDidMount() {
     this.setState({ loading: true });
     // Fetching from new api...
-    const url = `https://newsapi.org/v2/top-headlines?country=in&category=business&page=${this.state.page}&pageSize=${this.props.pageSize}&apiKey=d34ab57786dc4ece9656435b68646fa5`;
+    const url = `https://newsapi.org/v2/top-headlines?country=in&page=${this.state.page}&pageSize=${this.props.pageSize}&category=${this.props.category}&apiKey=d34ab57786dc4ece9656435b68646fa5`;
     const data = await fetch(url);
     const parsedData = await data.json();
     // console.log(parsedData);
@@ -44,9 +44,11 @@ export class News extends Component {
 
   previousPage = async () => {
     this.setState({ loading: true });
-    const url = `https://newsapi.org/v2/top-headlines?country=in&category=business&page=${
+    const url = `https://newsapi.org/v2/top-headlines?country=in&page=${
       this.state.page - 1
-    }&pageSize=${this.props.pageSize}&apiKey=d34ab57786dc4ece9656435b68646fa5`;
+    }&pageSize=${this.props.pageSize}&category=${
+      this.props.category
+    }&apiKey=d34ab57786dc4ece9656435b68646fa5`;
     console.log(url);
     const data = await fetch(url);
     const parsedData = await data.json();
@@ -73,9 +75,11 @@ export class News extends Component {
     // const pageSize = this.state.pageSize; // resuls for 1 page (It might less than 20 because in filter they will gone for null.)
     // const maxPages = this.state.maxPages;
 
-    const url = `https://newsapi.org/v2/top-headlines?country=in&category=business&page=${
+    const url = `https://newsapi.org/v2/top-headlines?country=in&page=${
       this.state.page + 1
-    }&pageSize=${this.props.pageSize}&apiKey=d34ab57786dc4ece9656435b68646fa5`;
+    }&pageSize=${this.props.pageSize}&category=${
+      this.props.category
+    }&apiKey=d34ab57786dc4ece9656435b68646fa5`;
     console.log(url);
 
     const data = await fetch(url);
@@ -97,7 +101,7 @@ export class News extends Component {
   };
 
   render() {
-    let { pageSize } = this.props;
+    // let { pageSize } = this.props;
     // console.log(this.state.articles);
     return (
       <>
@@ -116,7 +120,7 @@ export class News extends Component {
               {/* // In ract for each is not working properly we should use map to itreate array.  */}
               {this.state.articles.map((e) => {
                 return (
-                  <div className="col-md-3 my-3" key={e.url}>
+                  <div className="col-md-4 my-3" key={e.url}>
                     <NewsItem
                       title={e.title.slice(0, 38) + "...."}
                       description={e.description.slice(0, 83) + "...."}
