@@ -15,14 +15,13 @@ export class News extends Component {
       loading: false,
     };
   }
-  // Use in componentDidMount (don't know why... this is actually use of life cycale.)
-  async componentDidMount() {
+  updateNews = async () => {
     this.setState({ loading: true });
     // Fetching from new api...
     const url = `https://newsapi.org/v2/top-headlines?country=in&page=${this.state.page}&pageSize=${this.props.pageSize}&category=${this.props.category}&apiKey=d34ab57786dc4ece9656435b68646fa5`;
     const data = await fetch(url);
     const parsedData = await data.json();
-    // console.log(parsedData);
+
     // changing state
 
     this.setState({
@@ -37,67 +36,24 @@ export class News extends Component {
       ),
       loading: false,
     });
-    console.log(url);
+    // console.log(url);
+  };
+  // Use in componentDidMount (don't know why... this is actually use of life cycale.)
+  async componentDidMount() {
+    this.updateNews();
   }
 
   // Prev and next page logic
 
   previousPage = async () => {
-    this.setState({ loading: true });
-    const url = `https://newsapi.org/v2/top-headlines?country=in&page=${
-      this.state.page - 1
-    }&pageSize=${this.props.pageSize}&category=${
-      this.props.category
-    }&apiKey=d34ab57786dc4ece9656435b68646fa5`;
-    console.log(url);
-    const data = await fetch(url);
-    const parsedData = await data.json();
-    // console.log(parsedData);
-    // changing state
-
-    this.setState({
-      page: this.state.page - 1,
-      totalResults: parsedData.totalResults,
-      articles: parsedData.articles.filter(
-        (e) =>
-          e.title !== null &&
-          e.description !== null &&
-          e.urlToImage !== null &&
-          e.url !== null
-      ),
-      loading: false,
-    });
+    await this.setState({ loading: true, page: this.state.page - 1 });
+    this.updateNews();
   };
 
   nextPage = async () => {
-    this.setState({ loading: true });
-    // Page counting logic
-    // const pageSize = this.state.pageSize; // resuls for 1 page (It might less than 20 because in filter they will gone for null.)
-    // const maxPages = this.state.maxPages;
+    await this.setState({ loading: true, page: this.state.page + 1 });
 
-    const url = `https://newsapi.org/v2/top-headlines?country=in&page=${
-      this.state.page + 1
-    }&pageSize=${this.props.pageSize}&category=${
-      this.props.category
-    }&apiKey=d34ab57786dc4ece9656435b68646fa5`;
-    console.log(url);
-
-    const data = await fetch(url);
-    const parsedData = await data.json();
-    // console.log(parsedData);
-    // changing state
-    this.setState({
-      page: this.state.page + 1,
-      articles: parsedData.articles.filter(
-        (e) =>
-          e.title !== null &&
-          e.description !== null &&
-          e.urlToImage !== null &&
-          e.url !== null
-      ),
-      loading: false,
-    });
-    // console.log("2", url);
+    this.updateNews();
   };
 
   render() {
