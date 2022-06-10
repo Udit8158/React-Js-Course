@@ -3,9 +3,11 @@ import NewsItem from "./NewsItem";
 import Spinner from "./Spinner.svg";
 
 export class News extends Component {
+  capializeFirstLetter = (str) =>
+    str[0].toUpperCase() + str.slice(1, str.length);
   // Setting state...
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       articles: [],
       page: 1,
@@ -14,6 +16,11 @@ export class News extends Component {
       maxPages: 0,
       loading: false,
     };
+
+    // Change title dynamically
+    document.title = `NewsMonkey - ${this.capializeFirstLetter(
+      this.props.category
+    )}`;
   }
   updateNews = async () => {
     this.setState({ loading: true });
@@ -68,13 +75,15 @@ export class News extends Component {
               mode === "light" ? "dark" : "light"
             }`}
           >
-            Our top headlines
+            {`Our top  ${this.capializeFirstLetter(
+              this.props.category
+            )} headlines`}
           </h1>
 
           {/* Means  if this.state.loading === true then only display this loadig spinner  (very useful syntax) */}
           {this.state.loading && (
             <div className="text-center">
-              <img src={Spinner} alt="React Logo" />
+              <img src={Spinner} alt="Spinner" />
             </div>
           )}
           {!this.state.loading && (
