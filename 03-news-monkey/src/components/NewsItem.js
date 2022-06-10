@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export class NewsItem extends Component {
   render() {
     // Use props in newsitem...
-    let { title, description, imageUrl, newsUrl, author, date, source, mode } =
+    let { title, description, imageUrl, newsUrl, author, date, source } =
       this.props;
     let cardBodyDarkModeColor;
 
