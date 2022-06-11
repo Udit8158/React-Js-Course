@@ -13,10 +13,7 @@ export class NewsItem extends Component {
       cardBodyDarkModeColor = "white";
     }
     return (
-      <div
-        className="container"
-        // style={{ backgroundColor: cardBodyDarkModeColor }}
-      >
+      <div className="col-md-4 my-3">
         <div
           className="card"
           style={{ backgroundColor: cardBodyDarkModeColor }}
