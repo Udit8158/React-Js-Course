@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import NewsItem from "./NewsItem";
-import Spinner from "./Spinner.svg";
+
+import Spinner from "./Spinner.js";
 
 export class News extends Component {
   capializeFirstLetter = (str) =>
@@ -14,7 +16,7 @@ export class News extends Component {
       totalResults: 0,
       pageSize: 20,
       maxPages: 0,
-      loading: false,
+      loading: true,
     };
 
     // Change title dynamically
@@ -25,7 +27,7 @@ export class News extends Component {
   updateNews = async () => {
     this.setState({ loading: true });
     // Fetching from new api...
-    const url = `https://newsapi.org/v2/top-headlines?country=in&page=${this.state.page}&pageSize=${this.props.pageSize}&category=${this.props.category}&apiKey=d34ab57786dc4ece9656435b68646fa5`;
+    const url = `https://newsapi.org/v2/top-headlines?country=in&page=${this.state.page}&pageSize=${this.props.pageSize}&category=${this.props.category}&apiKey=e603c44254f246cd9653b673a4137e42`;
     const data = await fetch(url);
     const parsedData = await data.json();
 
@@ -34,33 +36,41 @@ export class News extends Component {
     this.setState({
       totalResults: parsedData.totalResults,
       maxPages: Math.ceil(parsedData.totalResults / this.props.pageSize),
-      articles: parsedData.articles.filter(
-        (e) =>
-          e.title !== null &&
-          e.description !== null &&
-          e.urlToImage !== null &&
-          e.url !== null
-      ),
+      articles: parsedData.articles,
+
+      // articles: parsedData.articles,
+
       loading: false,
     });
     // console.log(url);
   };
   // Use in componentDidMount (don't know why... this is actually use of life cycale.)
   async componentDidMount() {
+    this.setState({ loading: false });
     this.updateNews();
+    // console.log(this.state.articles.length, this.state.totalResults);
   }
 
-  // Prev and next page logic
+  fetchMoreData = async () => {
+    this.setState({ page: this.state.page + 1 });
 
-  previousPage = async () => {
-    await this.setState({ loading: true, page: this.state.page - 1 });
-    this.updateNews();
-  };
+    // this.setState({ loading: true });
+    // Fetching from new api...
+    const url = `https://newsapi.org/v2/top-headlines?country=in&page=${this.state.page}&pageSize=${this.props.pageSize}&category=${this.props.category}&apiKey=e603c44254f246cd9653b673a4137e42`;
+    const data = await fetch(url);
+    const parsedData = await data.json();
 
-  nextPage = async () => {
-    await this.setState({ loading: true, page: this.state.page + 1 });
+    // await console.log(this.articles.length);
 
-    this.updateNews();
+    // changing state
+
+    this.setState({
+      totalResults: parsedData.totalResults,
+      maxPages: Math.ceil(parsedData.totalResults / this.props.pageSize),
+      articles: this.state.articles.concat(parsedData.articles),
+      // articles: this.state.articles.concat(parsedData.articles),
+      // loading: false,
+    });
   };
 
   render() {
@@ -81,12 +91,14 @@ export class News extends Component {
           </h1>
 
           {/* Means  if this.state.loading === true then only display this loadig spinner  (very useful syntax) */}
-          {this.state.loading && (
-            <div className="text-center">
-              <img src={Spinner} alt="Spinner" />
-            </div>
-          )}
-          {!this.state.loading && (
+          {this.state.loading && <Spinner />}
+
+          <InfiniteScroll
+            dataLength={this.state.articles.length}
+            next={this.fetchMoreData}
+            hasMore={this.state.articles.length !== this.state.totalResults}
+            loader={<Spinner />}
+          >
             <div className="row my-2">
               {/* Generate this part */}
               {/* // In ract for each is not working properly we should use map to itreate array.  */}
@@ -94,8 +106,8 @@ export class News extends Component {
                 return (
                   <div className="col-md-4 my-3" key={e.url}>
                     <NewsItem
-                      title={e.title.slice(0, 38) + "...."}
-                      description={e.description.slice(0, 83) + "...."}
+                      title={e.title ? e.title : ""}
+                      description={e.description ? e.description : ""}
                       imageUrl={e.urlToImage}
                       newsUrl={e.url}
                       author={e.author}
@@ -107,9 +119,10 @@ export class News extends Component {
                 );
               })}
             </div>
-          )}
+          </InfiniteScroll>
+
           {/* Previous and next btn container */}
-          <div className="container my-3 d-flex justify-content-between">
+          {/* <div className="container my-3 d-flex justify-content-between">
             <button
               type="button"
               className="btn btn-primary"
@@ -126,7 +139,7 @@ export class News extends Component {
             >
               Next &rarr;
             </button>
-          </div>
+          </div> */}
         </div>
       </>
     );
