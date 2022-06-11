@@ -30,7 +30,11 @@ export class News extends Component {
     // Fetching from new api...
     const url = `https://newsapi.org/v2/top-headlines?country=in&page=${this.state.page}&pageSize=${this.props.pageSize}&category=${this.props.category}&apiKey=d34ab57786dc4ece9656435b68646fa5`;
     const data = await fetch(url);
+
+    this.props.setProgress(40);
     const parsedData = await data.json();
+
+    this.props.setProgress(70);
 
     // changing state
 
@@ -40,6 +44,7 @@ export class News extends Component {
       // articles: parsedData.articles,
       loading: false,
     });
+    this.props.setProgress(100);
     console.log(url, this.state.articles);
   }
   // Use in componentDidMount (don't know why... this is actually use of life cycale.)

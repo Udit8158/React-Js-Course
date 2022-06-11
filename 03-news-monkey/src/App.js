@@ -5,13 +5,19 @@ import Navbar from "./components/Navbar";
 import News from "./components/News";
 // import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoadingBar from "react-top-loading-bar";
 export class App extends Component {
   constructor() {
     super();
     this.state = {
       mode: "light",
+      progress: 10,
     };
   }
+
+  setProgress = (p) => {
+    this.setState({ progress: p });
+  };
 
   toggleMode = () => {
     // const newMode = this.state.mode === "light" ? "dark" : "light";
@@ -36,6 +42,12 @@ export class App extends Component {
             toggleMode={this.toggleMode}
             title="NewsMonkey"
           />
+          <LoadingBar
+            color="#f11946"
+            progress={this.state.progress}
+            onLoaderFinished={() => this.setProgress(0)}
+            height={3}
+          />
           <Routes>
             <Route
               exact
@@ -47,6 +59,8 @@ export class App extends Component {
                   category="general"
                   mode={this.state.mode}
                   toggleMode={this.state.toggleMode}
+                  progress={this.state.progress}
+                  setProgress={this.setProgress}
                 />
               }
             />
@@ -60,6 +74,8 @@ export class App extends Component {
                   category="business"
                   mode={this.state.mode}
                   toggleMode={this.state.toggleMode}
+                  progress={this.state.progress}
+                  setProgress={this.setProgress}
                 />
               }
             />
@@ -73,6 +89,8 @@ export class App extends Component {
                   category="sports"
                   mode={this.state.mode}
                   toggleMode={this.state.toggleMode}
+                  progress={this.state.progress}
+                  setProgress={this.setProgress}
                 />
               }
             />
@@ -86,6 +104,8 @@ export class App extends Component {
                   category="entertainment"
                   mode={this.state.mode}
                   toggleMode={this.state.toggleMode}
+                  progress={this.state.progress}
+                  setProgress={this.setProgress}
                 />
               }
             />
@@ -99,6 +119,8 @@ export class App extends Component {
                   category="health"
                   mode={this.state.mode}
                   toggleMode={this.state.toggleMode}
+                  progress={this.state.progress}
+                  setProgress={this.setProgress}
                 />
               }
             />
@@ -112,6 +134,8 @@ export class App extends Component {
                   category="science"
                   mode={this.state.mode}
                   toggleMode={this.state.toggleMode}
+                  progress={this.state.progress}
+                  setProgress={this.setProgress}
                 />
               }
             />
@@ -125,6 +149,8 @@ export class App extends Component {
                   category="technology"
                   mode={this.state.mode}
                   toggleMode={this.state.toggleMode}
+                  progress={this.state.progress}
+                  setProgress={this.setProgress}
                 />
               }
             />
