@@ -117,12 +117,12 @@ export class App extends Component {
             />
             <Route
               exact
-              path="/teachnology"
+              path="/technology"
               element={
                 <News
-                  key="teachnology"
+                  key="technology"
                   pageSize={8}
-                  category="teachnology"
+                  category="technology"
                   mode={this.state.mode}
                   toggleMode={this.state.toggleMode}
                 />

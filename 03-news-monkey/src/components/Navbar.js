@@ -40,7 +40,7 @@ export class Navbar extends Component {
                 <ListItem name="Health" path="/health" />
                 <ListItem name="Science" path="/science" />
                 <ListItem name="Sports" path="/sports" />
-                <ListItem name="Teachnology" path="/teachnology" />
+                <ListItem name="Technology" path="/technology" />
               </ul>
 
               {/* Darkmode section */}
