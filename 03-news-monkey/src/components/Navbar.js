@@ -44,7 +44,7 @@ export class Navbar extends Component {
               </ul>
 
               {/* Darkmode section */}
-              <div className="form-check form-switch mx-2">
+              <div className="form-check form-switch ">
                 <input
                   className="form-check-input"
                   type="checkbox"
@@ -62,7 +62,7 @@ export class Navbar extends Component {
                 </label>
               </div>
               {/* Search section */}
-              <form className="d-flex" role="search">
+              {/* <form className="d-flex" role="search">
                 <input
                   className="form-control me-2"
                   type="search"
@@ -70,7 +70,7 @@ export class Navbar extends Component {
                   aria-label="Search"
                 />
                 <button className="btn btn-primary">Search</button>
-              </form>
+              </form> */}
             </div>
           </div>
         </nav>
