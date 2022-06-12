@@ -10,6 +10,7 @@ const UserSchema = new Schema({
   },
   email: {
     type: String,
+    unique: true,
     required: true,
   },
   password: {
@@ -22,4 +23,8 @@ const UserSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("user", UserSchema);
+// module.exports = mongoose.model("user", UserSchema);
+// To do unique extenses (here like email)
+const User = mongoose.model("user", UserSchema);
+User.createIndexes();
+module.exports = User; // Here 'User' is a model which use  'UserSchema' and store in 'users' document of DB.
