@@ -1,0 +1,18 @@
+{
+  "name": "inotebook-backend",
+  "version": "1.0.0",
+  "description": "Backend for iNotebook - A note taking application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Udit Kundu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.3.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
