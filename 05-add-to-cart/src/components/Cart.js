@@ -3,14 +3,18 @@ import CartItem from "./CartItem";
 
 function Cart() {
   // getting cart products from localstorage and store it on state
-  const [productsInCart, setProductsInCart] = useState(
-    JSON.parse(localStorage.getItem("productItems"))
-  );
+  const [productsInCart, setProductsInCart] = useState([]);
+  let products = JSON.parse(localStorage.getItem("productItems"));
+  useEffect(() => {
+    if (products !== null) {
+      setProductsInCart(products);
+    }
+  }, []);
+  console.log(productsInCart);
 
-  // If there is no item is cart the it should an empty array not null.
-  if (productsInCart === null) {
-    setProductsInCart([]);
-  }
+  useEffect(() => {
+    localStorage.setItem("productItems", JSON.stringify(productsInCart));
+  }, [productsInCart.length]);
 
   // Function to remove products form cart
   const removeFromCart = (event) => {
@@ -23,10 +27,6 @@ function Cart() {
 
     setProductsInCart(filteredProducts);
   };
-
-  useEffect(() => {
-    localStorage.setItem("productItems", JSON.stringify(productsInCart));
-  }, [productsInCart.length]);
 
   // State variable for total price
   const [toalPrice, setTotalPrice] = useState(0);
