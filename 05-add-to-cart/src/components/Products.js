@@ -50,6 +50,7 @@ function Products(props) {
 
   // It is only run on reload and set productItems state with the information of cart from local storage (if there was any.)
   useEffect(() => {
+    document.title = props.pageTitle;
     const cartItems = window.localStorage.getItem("productItems");
     if (cartItems !== null) {
       setProductItems(JSON.parse(cartItems));

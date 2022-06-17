@@ -34,9 +34,11 @@ function Navbar() {
             </ul>
           </div>
         </div>
-        <Link to={"/cart"}>
-          <i className="fa-solid fa-cart-shopping mx-3 fs-3"></i>
-        </Link>
+        <div className="cart-icon ">
+          <Link to={"/cart"}>
+            <i className="fa-solid fa-cart-shopping mx-3 fs-3"></i>
+          </Link>
+        </div>
       </nav>
     </div>
   );

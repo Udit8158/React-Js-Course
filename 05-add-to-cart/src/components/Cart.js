@@ -6,11 +6,11 @@ function Cart() {
   const [productsInCart, setProductsInCart] = useState([]);
   let products = JSON.parse(localStorage.getItem("productItems"));
   useEffect(() => {
+    document.title = "Monkey-Cart | My Cart";
     if (products !== null) {
       setProductsInCart(products);
     }
   }, []);
-  console.log(productsInCart);
 
   useEffect(() => {
     localStorage.setItem("productItems", JSON.stringify(productsInCart));
@@ -46,7 +46,9 @@ function Cart() {
 
   return (
     <div className="container">
-      <h1 className="my-5 text-center">My Cart</h1>
+      <h1 className="mb-3 text-center" style={{ marginTop: "80px" }}>
+        My Cart
+      </h1>
       <h3 className="text-center">
         Total price : <span>{toalPrice}</span> $
       </h3>
