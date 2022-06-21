@@ -5,22 +5,44 @@ function App() {
   // State settings
   const [taskName, setTaskName] = useState("");
   let [tasks, setTasks] = useState([]);
-  const [taskKey, setTaskKey] = useState(Math.random());
+  const [taskKey, setTaskKey] = useState("");
 
+  // setting inputvalue on changing
   const taskValueSet = (event) => {
     setTaskName(event.target.value);
   };
+
+  // adding task
   const addTaskHandler = () => {
-    // console.log(taskName);
-
     tasks.push(taskName);
-    // tasks.filter((t) => !tasks.includes(t));
-    // console.log(taskKey);
-    // console.log(tasks);
 
-    setTaskKey(Math.random());
-    // console.log(tasks);
+    // task add in to the localstorage
+    localStorage.setItem("tasksArr", JSON.stringify(tasks));
+
+    // very odd behavior extra line for solving the bug (which I don't understand.)
+    setTaskKey(taskName);
   };
+
+  const deleteTaskHandler = (event) => {
+    const deletedTask = event.target.previousSibling;
+    tasks = tasks.filter((t) => t !== deletedTask);
+    setTasks(tasks);
+    console.log(tasks);
+  };
+
+  // Only run this at the first time and setting localstorage.
+  useEffect(() => {
+    let tasksArr = localStorage.getItem("tasksArr");
+
+    if (tasksArr === null) {
+      // tasksArr = []
+      localStorage.setItem("tasksArr", JSON.stringify(tasks));
+    } else {
+      tasksArr = JSON.parse(tasksArr);
+    }
+
+    setTasks(tasksArr);
+  }, []);
 
   return (
     <>
@@ -46,13 +68,17 @@ function App() {
           </div>
         </form>
 
-        {/* Tasks */}
+        {/* Populate Tasks */}
         <div className="task-container mt-3">
           <h3 className="text-center">Your tasks</h3>
           {tasks.map((t) => {
-            // console.log(tasks);
-
-            return <Task taskName={t} key={t} />;
+            return (
+              <Task
+                taskName={t}
+                key={t}
+                deleteTaskHandler={deleteTaskHandler}
+              />
+            );
           })}
         </div>
       </div>
