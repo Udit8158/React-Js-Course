@@ -14,7 +14,7 @@ function App() {
 
   // adding task
   const addTaskHandler = () => {
-    tasks.push(taskName);
+    tasks.push({ text: taskName, id: tasks.length });
 
     // task add in to the localstorage
     localStorage.setItem("tasksArr", JSON.stringify(tasks));
@@ -23,11 +23,15 @@ function App() {
     setTaskKey(taskName);
   };
 
+  // Function for deleting tasks
   const deleteTaskHandler = (event) => {
-    const deletedTask = event.target.previousSibling;
-    tasks = tasks.filter((t) => t !== deletedTask);
-    setTasks(tasks);
-    console.log(tasks);
+    const deletedTaskID = event.target.id;
+
+    const filteredTasks = tasks.filter((t) => t.id != deletedTaskID);
+    setTasks(filteredTasks);
+
+    // Also update local storage
+    localStorage.setItem("tasksArr", JSON.stringify(filteredTasks));
   };
 
   // Only run this at the first time and setting localstorage.
@@ -35,7 +39,6 @@ function App() {
     let tasksArr = localStorage.getItem("tasksArr");
 
     if (tasksArr === null) {
-      // tasksArr = []
       localStorage.setItem("tasksArr", JSON.stringify(tasks));
     } else {
       tasksArr = JSON.parse(tasksArr);
@@ -74,9 +77,10 @@ function App() {
           {tasks.map((t) => {
             return (
               <Task
-                taskName={t}
-                key={t}
+                taskName={t.text}
+                key={t.id}
                 deleteTaskHandler={deleteTaskHandler}
+                id={t.id}
               />
             );
           })}

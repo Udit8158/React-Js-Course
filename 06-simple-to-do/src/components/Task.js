@@ -10,6 +10,7 @@ function Task(props) {
           <i
             className="fa-solid fa-trash-can "
             onClick={props.deleteTaskHandler}
+            id={props.id}
           ></i>
         </label>
       </div>
