@@ -3,17 +3,23 @@ import React from "react";
 function Task(props) {
   return (
     <>
-      <div className="list-group">
-        <label className="list-group-item my-2 d-flex justify-content-between fs-2">
-          <input className="form-check-input me-1" type="checkbox" value="" />
+      <ul className="list-group fs-4">
+        <li className="list-group-item d-flex justify-content-between">
+          <input
+            className="form-check-input me-1"
+            type="checkbox"
+            value=""
+            aria-label="..."
+          />
           {props.taskName}
+
           <i
             className="fa-solid fa-trash-can "
             onClick={props.deleteTaskHandler}
             id={props.id}
           ></i>
-        </label>
-      </div>
+        </li>
+      </ul>
     </>
   );
 }
