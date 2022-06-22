@@ -15,7 +15,9 @@ function App() {
 
   // adding task
   const addTaskHandler = () => {
-    tasks.push({ text: taskName, id: tasks.length });
+    if (taskName !== "" && taskName !== null) {
+      tasks.push({ text: taskName, id: tasks.length });
+    }
 
     // task add in to the localstorage
     localStorage.setItem("tasksArr", JSON.stringify(tasks));
