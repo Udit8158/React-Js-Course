@@ -19,8 +19,8 @@ function App() {
     // task add in to the localstorage
     localStorage.setItem("tasksArr", JSON.stringify(tasks));
 
-    // very odd behavior extra line for solving the bug (which I don't understand.)
-    setTaskKey(taskName);
+    // Set taskname blank which is input box value
+    setTaskName("");
   };
 
   // Function for deleting tasks
@@ -33,6 +33,9 @@ function App() {
     // Also update local storage
     localStorage.setItem("tasksArr", JSON.stringify(filteredTasks));
   };
+
+  // Task complete
+  const taskCompleteHandler = () => {};
 
   // Only run this at the first time and setting localstorage.
   useEffect(() => {
@@ -61,6 +64,7 @@ function App() {
               aria-describedby="emailHelp"
               placeholder="Add your tasks"
               onChange={taskValueSet}
+              value={taskName}
             />
             <div
               className="btn btn-primary fs-4 fw-bold"
@@ -80,6 +84,7 @@ function App() {
                 taskName={t.text}
                 key={t.id}
                 deleteTaskHandler={deleteTaskHandler}
+                taskCompleteHandler={taskCompleteHandler}
                 id={t.id}
               />
             );
