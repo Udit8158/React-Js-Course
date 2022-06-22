@@ -4,10 +4,10 @@ function Task(props) {
   return (
     <>
       <ul className="list-group fs-4">
-        <li className="list-group-item d-flex justify-content-between fw-light my-1">
+        <li className="list-group-item d-flex justify-content-between my-1">
           <hr
             className="border-primary border-3 opacity-75 position-absolute d-none"
-            style={{ width: "90%" }}
+            style={{ width: "90%", left: "50px" }}
           />
           <input
             className="form-check-input me-1"
