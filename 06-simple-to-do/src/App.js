@@ -17,7 +17,11 @@ function App() {
   // adding task
   const addTaskHandler = () => {
     if (taskName !== "" && taskName !== null) {
-      tasks.push({ text: taskName, id: tasks.length, completed: false });
+      tasks.push({
+        text: taskName,
+        id: Math.random() * 1000,
+        completed: false,
+      });
     }
 
     // task add in to the localstorage
@@ -36,8 +40,13 @@ function App() {
     );
     setTasks(filteredTasks);
 
+    // Bugs in completed task so do this again
+    const completedTask = filteredTasks.filter((t) => t.completed === true);
+    setCompletedTasksNumber(completedTask.length);
+
     // Also update local storage
     localStorage.setItem("tasksArr", JSON.stringify(filteredTasks));
+    localStorage.setItem("completedTasksNumber", completedTask.length);
   };
 
   // Task complete
@@ -52,29 +61,38 @@ function App() {
     setTasks(completdTasksFilter);
     setTaskCompleteHandler(!taskCompleteHandlerRun);
 
+    // For completed task
+    const completedTask = completdTasksFilter.filter(
+      (t) => t.completed === true
+    );
+    setCompletedTasksNumber(completedTask.length);
+
     // Update localstorage also
     localStorage.setItem("tasksArr", JSON.stringify(completdTasksFilter));
+    localStorage.setItem("completedTasksNumber", completedTask.length);
   };
-  console.log(tasks);
 
   // Only run this at the first time and setting localstorage.
   useEffect(() => {
     let tasksArr = localStorage.getItem("tasksArr");
-
+    let completedTaskNumberCount = localStorage.getItem("completedTasksNumber");
     if (tasksArr === null) {
       localStorage.setItem("tasksArr", JSON.stringify(tasks));
     } else {
       tasksArr = JSON.parse(tasksArr);
     }
-
+    if (completedTaskNumberCount === null) {
+      completedTaskNumberCount = 0;
+    }
     setTasks(tasksArr);
+    setCompletedTasksNumber(completedTaskNumberCount);
   }, []);
 
   return (
     <>
       {/* Todo section */}
       <div className="container">
-        <h1 className="text-center mt-3">Add Your Todos</h1>
+        <h1 className="text-center mt-3">Udit's Todos</h1>
         <form>
           <div className="mb-3 mt-5 d-flex justify-content-between">
             <input
