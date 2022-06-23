@@ -117,7 +117,7 @@ function App() {
         <div className="task-container mt-3">
           <h3 className="text-center">Your tasks</h3>
           <p className="text-center">
-            You have {tasks.length - completedTasksNumber} tasks today.
+            You have {tasks.length - completedTasksNumber} tasks left today.
           </p>
           <ul className="list-group fs-4">
             {tasks.map((t) => {
