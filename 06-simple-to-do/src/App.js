@@ -53,7 +53,7 @@ function App() {
   const taskCompleteHandler = (event) => {
     // make completed : true in the completed tasks
     const completdTasksFilter = tasks.map((item) => {
-      if (item.id == event.target.id) {
+      if (Number(item.id) === Number(event.target.id)) {
         return { ...item, completed: !item.completed };
       }
       return item;
