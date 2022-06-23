@@ -7,6 +7,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
   // const [completedTasks, setCompletedTasks] = useState([]);
   const [completedTasksNumber, setCompletedTasksNumber] = useState(0);
+  const [taskCompleteHandlerRun, setTaskCompleteHandler] = useState(true);
 
   // setting inputvalue on changing
   const taskValueSet = (event) => {
@@ -41,22 +42,20 @@ function App() {
 
   // Task complete
   const taskCompleteHandler = (event) => {
-    const tagetedHrLine = event.target.previousSibling;
-    const classesOfTargetHrLine = Array.from(tagetedHrLine.classList);
-    const listElement = tagetedHrLine.parentElement;
-    // console.log(event.target);
+    // make completed : true in the completed tasks
+    const completdTasksFilter = tasks.map((item) => {
+      if (item.id == event.target.id) {
+        return { ...item, completed: !item.completed };
+      }
+      return item;
+    });
+    setTasks(completdTasksFilter);
+    setTaskCompleteHandler(!taskCompleteHandlerRun);
 
-    // condition for completition of tasks
-    if (classesOfTargetHrLine.includes("d-none")) {
-      tagetedHrLine.classList.remove("d-none");
-      listElement.classList.add("fw-light");
-      setCompletedTasksNumber(completedTasksNumber + 1);
-    } else {
-      tagetedHrLine.classList.add("d-none");
-      listElement.classList.remove("fw-light");
-      setCompletedTasksNumber(completedTasksNumber - 1);
-    }
+    // Update localstorage also
+    localStorage.setItem("tasksArr", JSON.stringify(completdTasksFilter));
   };
+  console.log(tasks);
 
   // Only run this at the first time and setting localstorage.
   useEffect(() => {
@@ -111,6 +110,7 @@ function App() {
                   deleteTaskHandler={deleteTaskHandler}
                   taskCompleteHandler={taskCompleteHandler}
                   id={t.id}
+                  isCompleted={t.completed}
                 />
               );
             })}

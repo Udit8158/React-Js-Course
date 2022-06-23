@@ -1,12 +1,16 @@
 import React from "react";
-
+import "./Task.css";
 function Task(props) {
   return (
     <>
-      <li className="list-group-item d-flex justify-content-between my-2">
+      <li
+        className={`list-group-item d-flex justify-content-between my-2 ${
+          props.isCompleted === true ? "completed" : ""
+        }`}
+      >
         <hr
-          className="border-primary border-3 opacity-75 position-absolute d-none"
-          style={{ width: "90%", left: "50px" }}
+          className="border-primary border-3 opacity-75 position-absolute d-none completed-hr"
+          // style={{ width: "90%", left: "50px" }}
         />
         <input
           className="form-check-input me-1"
