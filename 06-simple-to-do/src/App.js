@@ -16,7 +16,7 @@ function App() {
   // adding task
   const addTaskHandler = () => {
     if (taskName !== "" && taskName !== null) {
-      tasks.push({ text: taskName, id: tasks.length });
+      tasks.push({ text: taskName, id: tasks.length, completed: false });
     }
 
     // task add in to the localstorage
@@ -44,6 +44,7 @@ function App() {
     const tagetedHrLine = event.target.previousSibling;
     const classesOfTargetHrLine = Array.from(tagetedHrLine.classList);
     const listElement = tagetedHrLine.parentElement;
+    // console.log(event.target);
 
     // condition for completition of tasks
     if (classesOfTargetHrLine.includes("d-none")) {
@@ -101,17 +102,19 @@ function App() {
           <p className="text-center">
             You have {tasks.length - completedTasksNumber} tasks today.
           </p>
-          {tasks.map((t) => {
-            return (
-              <Task
-                taskName={t.text}
-                key={t.id}
-                deleteTaskHandler={deleteTaskHandler}
-                taskCompleteHandler={taskCompleteHandler}
-                id={t.id}
-              />
-            );
-          })}
+          <ul className="list-group fs-4">
+            {tasks.map((t) => {
+              return (
+                <Task
+                  taskName={t.text}
+                  key={t.id}
+                  deleteTaskHandler={deleteTaskHandler}
+                  taskCompleteHandler={taskCompleteHandler}
+                  id={t.id}
+                />
+              );
+            })}
+          </ul>
         </div>
       </div>
     </>
